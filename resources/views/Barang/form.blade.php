@@ -1,4 +1,4 @@
-<div class="modal fade" id="modalForm" padding-right: 17px;" aria-modal="true" role="dialog" data-backdrop="static" data_keyboard="false">
+<div class="modal fade" id="modalForm" padding-right: 17px; aria-modal="true" role="dialog" data-backdrop="static" data_keyboard="false">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">

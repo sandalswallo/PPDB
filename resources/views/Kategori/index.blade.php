@@ -115,6 +115,31 @@
                 })
             }
         })
+
+
+        //edit data
+    $('#formTambah').on('submit', function(e){
+            if(! e.preventDefault()){
+                $.post($('#formTambah form').attr('action'), $('#formTambah form').serialize())
+                .done((response) => {
+                    $('#formTambah form')[0].reset();
+                    table.ajax.reload();
+                    iziToast.success({
+                        title: 'Sukses',
+                        message: 'Data berhasil disimpan',
+                        position: 'topRight'
+                    })
+                })
+                .fail((errors) => {
+                    iziToast.error({
+                        title: 'Gagal',
+                        message: 'Data gagal disimpan',
+                        position: 'topRight'
+                    })
+                    return;
+                })
+            }
+        })
         
     function editData(url){
         $('#modalForm').modal('show');
@@ -139,8 +164,8 @@
     function deleteData(url) {
         // Menambahkan Alert Seperti Di Web Side SweetAlert 
         swal({
-            title: "Yakin Dek Ingin Hapus?",
-            text: "Jika Adek Klik Oke! Maka Data Akan Terhapus",
+            title: "Yakin Ingin Dihapus?",
+            text: "Jika Anda Klik Oke! Maka Data Akan Terhapus",
             icon: "warning",
             buttons: true,
             dangerMode: true,
@@ -153,7 +178,7 @@
             })            
             .done((response) => {
                 swal({
-                    title: "Sukses Dek!",
+                    title: "Sukses!",
                     text: "Data Berhasil Dihapus",
                     icon: "success",
                 });
@@ -161,7 +186,7 @@
             })
             .fail((errors) => {
                 swal({
-                    title: "Gagal Dek!",
+                    title: "Gagal!",
                     text: "Data Gagal Dihapus",
                     icon: "error",
                 });

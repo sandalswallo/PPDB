@@ -109,5 +109,62 @@
                 })
             }
         })
+
+        function editData(url){
+        $('#modalForm').modal('show');
+        $('#modalForm .modal-title').text('Edit Data tempat');
+
+        // Mereset Setelah Memencet Submit
+        $('#modalForm form')[0].reset();
+        $('#modalForm form').attr('action', url);
+        $('#modalForm [name=_method').val('put');
+
+        $.get(url)
+        .done((response) => {
+            $('#modalForm [name=nama]').val(response.nama);
+        })
+        .fail((errors) => {
+            alert('Tidak Dapat Menampilkan Data');
+            return;
+        })
+    }
+
+
+    function deleteData(url) {
+        // Menambahkan Alert Seperti Di Web Side SweetAlert 
+        swal({
+            title: "Yakin Ingin Dihapus?",
+            text: "Jika Anda Klik Oke! Maka Data Akan Terhapus",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                $.post(url, {
+                    '_token' : $('[name = csrf-token]').attr('content'),
+                    '_method' : 'delete'
+            })            
+            .done((response) => {
+                swal({
+                    title: "Sukses!",
+                    text: "Data Berhasil Dihapus",
+                    icon: "success",
+                });
+                    return;
+            })
+            .fail((errors) => {
+                swal({
+                    title: "Gagal!",
+                    text: "Data Gagal Dihapus",
+                    icon: "error",
+                });
+                    return;
+            });
+
+            table.ajax.reload();
+        }
+    });
+}
     </script>
 @endpush

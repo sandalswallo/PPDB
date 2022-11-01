@@ -17,17 +17,20 @@ class BarangController extends Controller
      */
     public function index()
     {
+        $bulan = date('m');
+        $tahun = date('Y');
+        $maxid = Barang::max('id')+1;
+
         $barang = Barang::all();
         $tempat = Tempat::all();
         $kategori = Kategori::all();
-        return view('barang.index', compact('barang', 'tempat', 'kategori'));
+        $kode = 'INV'.'/'.$maxid. '/'. $bulan. '/'. $tahun;
+        return view('barang.index', compact('barang', 'tempat', 'kategori','kode'));
     }
 
     public function data() // Menambahkan DataTable
     {
-        $date -> format('d');
-        $year -> format('Y');
-
+        
         $barang = Barang::orderBy('id', 'desc')->get();
 
         return datatables()

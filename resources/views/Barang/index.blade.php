@@ -17,8 +17,11 @@
                     <h4>Data Barang</h4>
                    </div>
                    <div class="col-12-col-md-2-col-lg-2">
-                    <button type="button" onclick="addForm('{{route('barang.store')}}')"class="btn btn-success shadow-sm rounded-pill"><i class="fa fa-print"></i>Print</button>
-                    <button type="button" onclick="addForm('{{ route('barang.store') }}')" class="btn btn-primary shadow-sm rounded-pill"><i class="fa fa-plus"></i>Tambah</button>
+                    <button type="button" onclick="addForm('{{route('barang.store')}}')"class="btn btn-success shadow-sm rounded-pill">
+                        <i class="fa fa-print"></i>Print</button>
+                        
+                    <button type="button" onclick="addForm('{{ route('barang.store') }}')" class="btn btn-primary shadow-sm rounded-pill">
+                        <i class="fa fa-plus"></i>Tambah</button>
                    </div> 
                 </div>
 

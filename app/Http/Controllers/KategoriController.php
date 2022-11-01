@@ -127,6 +127,6 @@ class KategoriController extends Controller
         $kategori = Kategori::find($id);
         $kategori -> delete();
  
-        return response()->json(null, 204);
+        return redirect('kategori');
     }
 }
