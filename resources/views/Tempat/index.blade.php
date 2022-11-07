@@ -1,14 +1,18 @@
 @extends('template.layout')
+
 @section('title')
     Tempat
 @endsection
+
 @section('content')
     <section class="section">
         <div class="section-header">
             <h1>Tempat</h1>
         </div>
+
         <div class="section-body">
             <div class="row">
+
                 {{-- Data Tempat --}}
                 <div class="col-12 col-md-7 col-lg-7">
                     <div class="card">
@@ -16,20 +20,23 @@
                         <div class="card-header">
                             <h4>Data Tempat</h4>
                         </div>
+
                         {{-- Tabel --}}
                         <div class="card-body">
-                            <table class="table table-striped">
+                            <table class="table table-striped text-nowrap" style="width: 100%;">
                                 <thead>
                                     <tr>
-                                        <td style="width: 5%">No</td>
-                                        <td>Nama</td>
-                                        <td style="width: 15%">Aksi</td>
+                                        <td scope="col" width="50px">No</td>
+                                        <td scope="col">Nama</td>
+                                        <td scope="col" width="84px">Aksi</td>
                                     </tr>
                                 </thead>
                             </table>
                         </div>
+
                     </div>
                 </div>
+
                 {{-- Tambah Barang --}}
                 <div class="col-12 col-md-5 col-lg-5">
                     <div class="card">
@@ -43,16 +50,16 @@
                             @csrf
                             @method('POST')
                             <div class="form-group">
-
+                                    
                                     {{-- Add Nama --}}
                                     <label class="" for="nama">Nama Tempat</label>
-                                    <input type="text" autocomplete="off" name="nama" id="nama" value="{{ old('nama')}}" class="form-control @error('nama') is-invalid @enderror">
+                                    <input type="text" name="nama" id="nama" value="{{ old('nama')}}" class="form-control @error('nama') is-invalid @enderror">
                                     @error('nama')
                                         <div class="text-danger">
                                             {{ $message }}
                                         </div>
                                     @enderror
-
+                                    
                                     {{-- Tombol simpan dan batal --}}
                                     <div class="footer mt-2">
                                         <button type="submit" class="btn btn-success">Simpan</button>
@@ -67,12 +74,16 @@
             </div>
         </div>
     </section>
-@endsection
 
+@include('tempat.form')
+    
+@endsection
+    
 @push('script')
     <script>
     // Data Tables
     let table;
+
     $(function() {
         table = $('.table').DataTable({
             proccesing: true,
@@ -87,6 +98,7 @@
             ]
         });
     })
+
     $('#formTambah').on('submit', function(e){
             if(! e.preventDefault()){
                 $.post($('#formTambah form').attr('action'), $('#formTambah form').serialize())
@@ -110,61 +122,82 @@
             }
         })
 
-        function editData(url){
-        $('#modalForm').modal('show');
-        $('#modalForm .modal-title').text('Edit Data tempat');
+        // Fungsi Edit Data
+        $('#modalForm').on('submit', function(e){
+            if(! e.preventDefault()){
+                $.post($('#modalForm form').attr('action'), $('#modalForm form').serialize())
+                .done((response) => {
+                    $('#modalForm').modal('hide');
+                    table.ajax.reload();
+                    iziToast.success({
+                        title: 'Sukses',
+                        message: 'Data berhasil di ubah',
+                        position: 'topRight'
+                    })
+                })
+                .fail((errors) => {
+                    iziToast.error({
+                        title: 'Gagal',
+                        message: 'Data gagal di ubah',
+                        position: 'topRight'
+                    })
+                    return;
+                })
+            }
+        })
 
-        // Mereset Setelah Memencet Submit
+    function editData(url){
+        $('#modalForm').modal('show');
+        $('#modalForm .modal-title').text('Edit Data Tempat');
+
         $('#modalForm form')[0].reset();
         $('#modalForm form').attr('action', url);
-        $('#modalForm [name=_method').val('put');
+        $('#modalForm [name=_method]').val('put');
 
-        $.get(url)
-        .done((response) => {
-            $('#modalForm [name=nama]').val(response.nama);
-        })
-        .fail((errors) => {
-            alert('Tidak Dapat Menampilkan Data');
-            return;
-        })
-    }
-
-
-    function deleteData(url) {
-        // Menambahkan Alert Seperti Di Web Side SweetAlert 
-        swal({
-            title: "Yakin Ingin Dihapus?",
-            text: "Jika Anda Klik Oke! Maka Data Akan Terhapus",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-            })
-            .then((willDelete) => {
-            if (willDelete) {
-                $.post(url, {
-                    '_token' : $('[name = csrf-token]').attr('content'),
-                    '_method' : 'delete'
-            })            
+        $.get (url)
             .done((response) => {
-                swal({
-                    title: "Sukses!",
-                    text: "Data Berhasil Dihapus",
-                    icon: "success",
-                });
-                    return;
+                $('#modalForm [name=nama]').val(response.nama);
             })
             .fail((errors) => {
-                swal({
-                    title: "Gagal!",
-                    text: "Data Gagal Dihapus",
+                alert('Tidak Dapat Menampilkan Data');
+                return;
+            })
+    }
+
+    // Fungsi Delete Data
+    function deleteData(url){
+            swal({
+                title: "Apa anda yakin menghapus data ini?",
+                text: "Jika anda klik OK, maka data akan terhapus",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                if (willDelete) {
+                    $.post(url, {
+                    '_token' : $('[name=csrf-token]').attr('content'),
+                    '_method' : 'delete'
+                })
+                .done((response) => {
+                    swal({
+                    title: "Sukses",
+                    text: "Data berhasil dihapus!",
+                    icon: "success",
+                    });
+                })
+                .fail((errors) => {
+                    swal({
+                    title: "Gagal",
+                    text: "Data gagal dihapus!",
                     icon: "error",
-                });
-                    return;
+                    });
+                })
+                table.ajax.reload();
+                }
             });
 
-            table.ajax.reload();
         }
-    });
-}
+        
     </script>
 @endpush

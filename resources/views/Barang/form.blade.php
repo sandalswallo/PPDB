@@ -15,7 +15,7 @@
 
                         <!-- Add Kode -->
                         <label class="" for="nama">Kode Barang</label>
-                        <input type="text" class="form-control" value="..." aria-label="Disabled input example" disabled readonly>
+                        <input type="text" name="kode" class="form-control" value="{{ $kode }}" aria-label="Disabled input example" disabled readonly>
 
                          <!-- Add Nama  -->
                         <label class="" for="nama">Nama Barang</label>
