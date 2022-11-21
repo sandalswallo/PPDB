@@ -18,8 +18,8 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'Maing',
-            'email' => 'maing@admin',
+            'name' => 'ADMIN',
+            'email' => 'ADMIN@admin',
             'password' => bcrypt('admin'),
             'remember_token' => Str::random(20),
             'role' => 'admin'

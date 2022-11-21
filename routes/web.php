@@ -4,9 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     AuthController,
     DashboardController,
-    BarangController,
-    TempatController,
-    KategoriController
+    SiswaController,
+    JurusanController
 };
 
 Route::get('/', function () {
@@ -24,14 +23,14 @@ Route::post('/simpanRegister', [AuthController::class, 'simpanRegister'])->name(
 // Route Dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard'); 
 
-// Route Barang
-Route::get('/barang/data', [BarangController::class, 'data'])->name('barang.data');
-Route::resource('/barang', BarangController::class);
+// Route Siswa
+Route::get('/siswa/data', [SiswaController::class, 'data'])->name('siswa.data');
+Route::resource('/siswa', SiswaController::class);
 
 /// Route Tempat
-Route::get('/tempat/data', [TempatController::class, 'data'])->name('tempat.data');
-Route::resource('/tempat', TempatController::class);
+// Route::get('/tempat/data', [TempatController::class, 'data'])->name('tempat.data');
+// Route::resource('/tempat', TempatController::class);
 
-// Route Kategori
-Route::get('/kategori/data', [KategoriController::class, 'data'])->name('kategori.data');
-Route::resource('/kategori', KategoriController::class);
+// Route jurusan
+Route::get('/jurusan/data', [JurusanController::class, 'data'])->name('jurusan.data');
+Route::resource('/jurusan', JurusanController::class);

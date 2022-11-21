@@ -4,17 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Barang;
+use App\Models\Siswa;
 
-class Kategori extends Model
+class Jurusan extends Model
 {
     use HasFactory;
 
-    protected $table = 'kategori';
+    protected $table = 'Jurusan';
 
     protected $guarded = [];
 
-    public function Barang(){
-        return $this->hasMany(Barang::class);
+    public function Siswa(){
+        return $this->hasMany(Siswa::class);
     }
 }

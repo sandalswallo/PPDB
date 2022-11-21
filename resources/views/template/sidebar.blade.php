@@ -1,10 +1,10 @@
 <div class="main-sidebar sidebar-style-2">
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href="{{route('dashboard')}}" class="text-white">Inventory</a>
+                        <a href="{{route('dashboard')}}" class="text-white">PPDB</a>
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
-                        <a href="{{route('dashboard')}}" class="text-white">INV</a>
+                        <a href="{{route('dashboard')}}" class="text-white">PPDB</a>
                     </div>
                     <ul class="sidebar-menu">
                         <li class="menu-header">Dashboard</li>
@@ -17,26 +17,21 @@
 
                         <li class="menu-header">Master</li>
 
-                        <li class="{{ request()->is('barang*') ? 'active' : ''}}">
-                            <a href="{{ route('barang.index')}}" class="text-white">
+                        <li class="{{ request()->is('siswa*') ? 'active' : ''}}">
+                            <a href="{{ route('siswa.index')}}" class="text-white">
                                 <i class="fas fa-boxes"></i>
-                                <span>Barang</span>
+                                <span>siswa</span>
                             </a>
                         </li>
 
-                        <li class="{{ request()->is('tempat*') ? 'active' : ''}}">
-                            <a href="{{ route('tempat.index') }}" class="text-white">
+                        <li class="{{ request()->is('jurusan*') ? 'active' : ''}}">
+                            <a href="{{ route('jurusan.index') }}" class="text-white">
                                 <i class="fas fa-map-marker-alt"></i>
-                                <span>Tempat</span>
+                                <span>jurusan</span>
                             </a>
                         </li>
 
-                        <li class="{{ request()->is('kategori*') ? 'active' : ''}}">
-                            <a href="{{ route('kategori.index') }}" class="text-white">
-                                <i class="fas fa-list"></i>
-                                <span>Kategori</span>
-                            </a>
-                        </li>
+                       
 
                         <li class="menu-header">Setting</li>
 

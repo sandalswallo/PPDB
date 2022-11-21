@@ -1,24 +1,24 @@
 @extends('template.layout')
 
 @section('title')
-    Tempat
+    jurusan
 @endsection
 
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Tempat</h1>
+            <h1>jurusan</h1>
         </div>
 
         <div class="section-body">
             <div class="row">
 
-                {{-- Data Tempat --}}
+                {{-- Data jurusan --}}
                 <div class="col-12 col-md-7 col-lg-7">
                     <div class="card">
                         {{-- Judul --}}
                         <div class="card-header">
-                            <h4>Data Tempat</h4>
+                            <h4>Data jurusan</h4>
                         </div>
 
                         {{-- Tabel --}}
@@ -37,22 +37,22 @@
                     </div>
                 </div>
 
-                {{-- Tambah Barang --}}
+                {{-- Tambah jurusan --}}
                 <div class="col-12 col-md-5 col-lg-5">
                     <div class="card">
 
                         <div class="card-header">
-                            <h4>Tambah Tempat</h4>
+                            <h4>Tambah jurusan</h4>
                         </div>
 
                         <div class="card-body" id="formTambah">
-                            <form action="{{route('tempat.store')}}" method="POST">
+                            <form action="{{route('jurusan.store')}}" method="POST">
                             @csrf
                             @method('POST')
                             <div class="form-group">
                                     
                                     {{-- Add Nama --}}
-                                    <label class="" for="nama">Nama Tempat</label>
+                                    <label class="" for="nama">Nama jurusan</label>
                                     <input type="text" name="nama" id="nama" value="{{ old('nama')}}" class="form-control @error('nama') is-invalid @enderror">
                                     @error('nama')
                                         <div class="text-danger">
@@ -75,10 +75,10 @@
         </div>
     </section>
 
-@include('tempat.form')
-    
+@include('jurusan.form')
+
 @endsection
-    
+
 @push('script')
     <script>
     // Data Tables
@@ -89,7 +89,7 @@
             proccesing: true,
             autowidth: false,
             ajax: {
-                url: '{{ route('tempat.data') }}'
+                url: '{{ route('jurusan.data') }}'
             },
             columns: [
                 {data: 'DT_RowIndex'},
@@ -122,8 +122,8 @@
             }
         })
 
-        // Fungsi Edit Data
-        $('#modalForm').on('submit', function(e){
+    // Fungsi Edit Data
+    $('#modalForm').on('submit', function(e){
             if(! e.preventDefault()){
                 $.post($('#modalForm form').attr('action'), $('#modalForm form').serialize())
                 .done((response) => {
@@ -148,7 +148,7 @@
 
     function editData(url){
         $('#modalForm').modal('show');
-        $('#modalForm .modal-title').text('Edit Data Tempat');
+        $('#modalForm .modal-title').text('Edit Data jurusan');
 
         $('#modalForm form')[0].reset();
         $('#modalForm form').attr('action', url);
@@ -157,6 +157,7 @@
         $.get (url)
             .done((response) => {
                 $('#modalForm [name=nama]').val(response.nama);
+                // console.log(response.nama);
             })
             .fail((errors) => {
                 alert('Tidak Dapat Menampilkan Data');
@@ -198,6 +199,6 @@
             });
 
         }
-        
+
     </script>
 @endpush

@@ -13,12 +13,12 @@
                     @method('PUT')
                     <div class="form-group">
 
-                        <!-- Add Kode -->
-                        <label class="" for="nama">Kode Barang</label>
-                        <input type="text" name="kode" class="form-control" value="{{ $kode }}" aria-label="Disabled input example" disabled readonly>
+                        {{-- <!-- Add Kode -->
+                        <label class="" for="nama">Kode siswa</label>
+                        <input type="text" name="kode" class="form-control" value="{{ $kode }}" aria-label="Disabled input example" disabled readonly> --}}
 
                          <!-- Add Nama  -->
-                        <label class="" for="nama">Nama Barang</label>
+                        <label class="" for="nama">Nama siswa</label>
                         <input type="text" name="nama" id="nama" value="{{ old('nama')}}" class="form-control @error('nama') is-invalid @enderror">
                         @error('nama')
                             <div class="text-danger">
@@ -26,14 +26,14 @@
                             </div>
                         @enderror
 
-                         <!-- Add Kategori  -->
-                        <label class="mt-2" for="nama">Kategori</label>
-                        <select type="text" name="kategori_id" id="kategori_id" value="{{ old('kategori_id')}}" class="form-control @error('kategori_id') is-invalid @enderror">
+                         <!-- Add Jurusan  -->
+                        <label class="mt-2" for="nama">Jurusan</label>
+                        <select type="text" name="jurusan_id" id="jurusan_id" value="{{ old('jurusan_id')}}" class="form-control @error('jurusan_id') is-invalid @enderror">
                             <option selected>Pilih...</option>
-                            @foreach($kategori as $kategori)
-                                <option value="{{$kategori->id}}">{{$kategori->nama}}</option>
+                            @foreach($jurusan as $jurusan)
+                                <option value="{{$jurusan->id}}">{{$jurusan->nama}}</option>
                             @endforeach
-                        @error('kategori_id')
+                        @error('jurusan_id')
                             <div class="text-danger">
                                 {{ $message }}
                             </div>
@@ -41,7 +41,7 @@
                         </select>
 
                         <!-- Add Tempat  -->
-                        <label class="mt-2" for="nama">Tempat</label>
+                        {{-- <label class="mt-2" for="nama">Tempat</label>
                         <select type="text" name="tempat_id" id="tempat_id" class="form-control @error('tempat_id') is-invalid @enderror">
                             <option selected>Pilih...</option>
                             @foreach($tempat as $tempat)
@@ -52,10 +52,10 @@
                                 {{ $message }}
                             </div>
                         @enderror
-                        </select>
-
+                        </select> --}}
+{{-- 
                          <!-- Add Stok  -->
-                        <label class="mt-2" for="nama">Stok Barang</label>
+                        <label class="mt-2" for="nama">Stok siswa</label>
                         <input type="number" name="stok" id="stok" value="{{ old('stok')}}" class="form-control @error('stok') is-invalid @enderror">
                         @error('stok')
                             <div class="text-danger">
@@ -77,7 +77,7 @@
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
+                    </div> --}}
 
                 </form>
             </div>

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tempat;
+use App\Models\Jurusan;
 use Illuminate\Http\Request;
 use Validator;
 
-class TempatController extends Controller
+class jurusanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,30 +15,29 @@ class TempatController extends Controller
      */
     public function index()
     {
-        $tempat = Tempat::all();
-        return view('tempat.index', compact('tempat'));
+        $jurusan = Jurusan::all();
+        return view('jurusan.index', compact('jurusan'));
     }
-    
+
     public function data() // Menambahkan DataTable
     {
-        $tempat = Tempat::orderBy('id', 'desc')->get();
+        $jurusan = Jurusan::orderBy('id', 'desc')->get();
 
         return datatables()
-        ->of($tempat)
+        ->of($jurusan)
         ->addIndexColumn()
-        ->addColumn('aksi', function($tempat){
+        ->addColumn('aksi', function($jurusan){
             return '
             
             <div class="btn-group">
-                <button onclick="editData(`' .route('tempat.update', $tempat->id). '`)" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button>
-                <button onclick="deleteData(`' .route('tempat.destroy', $tempat->id). '`)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                <button onclick="editData(`' .route('jurusan.update', $jurusan->id). '`)" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button>
+                <button onclick="deleteData(`' .route('jurusan.destroy', $jurusan->id). '`)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
             </div>
         ';
     })
     ->rawColumns(['aksi'])
     ->make(true);
 }
-
 
     /**
      * Show the form for creating a new resource.
@@ -66,53 +65,53 @@ class TempatController extends Controller
             return response()->json($validator->errors(), 422); 
         }
 
-        $tempat = Tempat::create([
+        $jurusan = Jurusan::create([
             'nama' => $request->nama 
         ]);
 
         return response()->json([
             'success'=>true,
             'message' => 'Data Berhasil Tesimpan',
-            'data' => $tempat
+            'data' => $jurusan
         ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Tempat  $tempat
+     * @param  \App\Models\jurusan  $jurusan
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $tempat = Tempat::find($id);
-        return response()->json($tempat);
+        $jurusan=Jurusan::find($id);
+        return response()->json($jurusan);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Tempat  $tempat
+     * @param  \App\Models\jurusan  $jurusan
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $tempat = Tempat::find($id);
-        return view('tempat.index', compact ('tempat'));
+        $jurusan = Jurusan::find($id);
+        return view('jurusan.index', compact('jurusan'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Tempat  $tempat
+     * @param  \App\Models\jurusan  $jurusan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $id)
+    public function update(Request $request, $id)
     {
-        $tempat = Tempat::find($id);
-        $tempat->nama = $request->nama;
-        $tempat->update();
+        $jurusan = Jurusan::find($id);
+        $jurusan->nama = $request->nama;
+        $jurusan->update();
 
         return response()->json('Data Berhasil Disimpan');
     }
@@ -120,14 +119,14 @@ class TempatController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Tempat  $tempat
+     * @param  \App\Models\jurusan  $jurusan
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $tempat = Tempat::find($id);
-        $tempat->delete();
-
-        return redirect('tempat');
+        $jurusan = Jurusan::find($id);
+        $jurusan -> delete();
+ 
+        return redirect('jurusan');
     }
 }
