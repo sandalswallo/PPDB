@@ -1,13 +1,13 @@
 @extends('template.layout')
 
 @section('title')
-    jurusan
+    Jurusan
 @endsection
 
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>jurusan</h1>
+            <h1>Jurusan</h1>
         </div>
 
         <div class="section-body">
