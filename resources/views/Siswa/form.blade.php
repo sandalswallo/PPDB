@@ -53,8 +53,8 @@
                             </div>
                         @enderror
                         </select> --}}
-{{-- 
-                         <!-- Add Stok  -->
+
+                         {{-- <!-- Add Stok  -->
                         <label class="mt-2" for="nama">Stok siswa</label>
                         <input type="number" name="stok" id="stok" value="{{ old('stok')}}" class="form-control @error('stok') is-invalid @enderror">
                         @error('stok')
@@ -72,12 +72,12 @@
                             </div>
                         @enderror
 
-                    </div>
+                    </div> --}}
 
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div> --}}
+                    </div>
 
                 </form>
             </div>

@@ -34,10 +34,10 @@
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Barang</h4>
+                    <h4>SISWA</h4>
                   </div>
                   <div class="card-body">
-                    42
+                    890
                   </div>
                 </div>
               </div>
@@ -50,10 +50,10 @@
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Tempat</h4>
+                    <h4>JURUSAN</h4>
                   </div>
                   <div class="card-body">
-                    1,201
+                   12
                   </div>
                 </div>
               </div>
@@ -69,7 +69,7 @@
                     <h4>Online Users</h4>
                   </div>
                   <div class="card-body">
-                    47
+                    12
                   </div>
                 </div>
               </div>

@@ -19,14 +19,14 @@
 
                         <li class="{{ request()->is('siswa*') ? 'active' : ''}}">
                             <a href="{{ route('siswa.index')}}" class="text-white">
-                                <i class="fas fa-boxes"></i>
+                                <i class="fas fa-user"></i>
                                 <span>siswa</span>
                             </a>
                         </li>
 
                         <li class="{{ request()->is('jurusan*') ? 'active' : ''}}">
                             <a href="{{ route('jurusan.index') }}" class="text-white">
-                                <i class="fas fa-map-marker-alt"></i>
+                                <i class="fas fa-boxes"></i>
                                 <span>jurusan</span>
                             </a>
                         </li>

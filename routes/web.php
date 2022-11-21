@@ -8,8 +8,8 @@ use App\Http\Controllers\{
     JurusanController
 };
 
-Route::get('/', function () {
-    return view('auth.login');
+Route::get('/welcome', function () {
+    return view('home.welcome');
 });
 
 // Route Login

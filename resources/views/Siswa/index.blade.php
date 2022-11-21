@@ -36,8 +36,7 @@
                             <table class="table table-striped text-nowrap" style="width: 100%;">
                                 <thead>
                                     <tr>
-                                        <td scope="col" style="width: 50px;">No</td>
-                                        <td scope="col">Kode</td>
+                                        <td scope="col" style="width: 50px;">No</td>>
                                         <td scope="col">Nama</td>
                                       
                                         <td scope="col" style="width: 120px;">Aksi</td>
@@ -73,9 +72,7 @@
             },
             columns: [
                 {data: 'DT_RowIndex'},
-                {data: 'kode'},
                 {data: 'nama'},
-                
                 {data: 'aksi'}
             ]
         });
@@ -148,7 +145,7 @@
                 .done((response) => {
                     $('#modalForm [name=kode]').val(response.kode);
                     $('#modalForm [name=nama]').val(response.nama);
-                    $('#modalForm [name=kategori_id]').val(response.kategori_id);
+                    $('#modalForm [name=jurusan_id]').val(response.jurusan_id);
                
                     $('#modalForm [name=stok]').val(response.stok);
                     $('#modalForm [name=keterangan]').val(response.keterangan);
