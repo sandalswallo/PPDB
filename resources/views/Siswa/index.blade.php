@@ -38,7 +38,10 @@
                                     <tr>
                                         <td scope="col" style="width: 50px;">No</td>>
                                         <td scope="col">Nama</td>
-                                      
+                                        <td scope="col">Kelas</td>
+                                        <td scope="col">Jurusan</td>
+                                        <td scope="col">Asal sekolah</td>
+                                        <td scope="col">Jenis Kelamin</td>                                   
                                         <td scope="col" style="width: 120px;">Aksi</td>
                                     </tr>
                                 </thead>
@@ -60,135 +63,108 @@
 
 @push('script')
 <script>
-    // Data Tables
+    //data tables
     let table;
-
-    $(function() {
+    $(function () {
         table = $('.table').DataTable({
             proccesing: true,
-            autowidth: false,
+            autowitdh: false,
             ajax: {
                 url: '{{ route('siswa.data') }}'
             },
             columns: [
                 {data: 'DT_RowIndex'},
                 {data: 'nama'},
+                {data: 'jenis_kelamin'},
+                {data: 'jurusan_id'},
+                {data: 'kelas'},
+                {data: 'asal_sekolah'},
                 {data: 'aksi'}
             ]
         });
     })
-
-    $('#modalForm').on('submit', function(e){
-            if(! e.preventDefault()){
-                $.post($('#modalForm form').attr('action'), $('#modalForm form').serialize())
+    $('#modalForm').on('submit', function (e) {
+        if (!e.preventDefault()) {
+            $.post($('#modalForm form').attr('action'), $('#modalForm form').serialize())
                 .done((response) => {
-                    $('#modalForm form')[0].reset();
+                    $('#modalForm')[0].reset();
                     table.ajax.reload();
                     iziToast.success({
                         title: 'Sukses',
-                        message: 'Data berhasil disimpan',
+                        message: 'Data Berhasil diSimpan',
                         position: 'topRight'
                     })
                 })
                 .fail((errors) => {
                     iziToast.error({
                         title: 'Gagal',
-                        message: 'Data gagal disimpan',
+                        message: 'Data Gagal diSimpan',
                         position: 'topRight'
                     })
                     return;
                 })
-            }
-        })
-
-    $('#modalForm').on('submit', function(e){
-        if(! e.preventDefault()){
-            $.post($('#modalForm form').attr('action'), $('#modalForm form').serialize())
-            .done((response) => {
-                $('#modalForm').modal('hide');
-                table.ajax.reload();
-                iziToast.success({
-                    title: 'Sukses',
-                    message: 'Data berhasil disimpan',
-                    position: 'topRight'
-                })
-            })
-            .fail((errors) => {
-                iziToast.error({
-                    title: 'Gagal',
-                    message: 'Data gagal disimpan',
-                    position: 'topRight'
-                })
-                return;
-            })
         }
     })
-
-        function addForm(url){
-            $('#modalForm').modal('show');
-            $('#modalForm .modal-title').text('Tambah Data siswa');
-            $('#modalForm form')[0].reset();
-
-            $('#modalForm form').attr('action', url);
-            $('#modalForm [name=_method]').val('post');
-        }
-
-        function editData(url){
-            $('#modalForm').modal('show');
-            $('#modalForm .modal-title').text('Edit Data siswa');
-
-            $('#modalForm form')[0].reset();
-            $('#modalForm form').attr('action', url);
-            $('#modalForm [name=_method]').val('put');
-
-            $.get (url)
-                .done((response) => {
-                    $('#modalForm [name=kode]').val(response.kode);
-                    $('#modalForm [name=nama]').val(response.nama);
-                    $('#modalForm [name=jurusan_id]').val(response.jurusan_id);
-               
-                    $('#modalForm [name=stok]').val(response.stok);
-                    $('#modalForm [name=keterangan]').val(response.keterangan);
-                    // console.log(response.nama);
-                })
-                .fail((errors) => {
-                    alert('Tidak Dapat Menampilkan Data');
-                    return;
-                })
-        }
-
-        function deleteData(url){
-            swal({
-                title: "Apa anda yakin menghapus data ini?",
-                text: "Jika anda klik OK, maka data akan terhapus",
+    function addForm(url) {
+        $('#modalForm').modal('show');
+        $('#modalForm .modal-title').text('Tambah Data siswa');
+        $('#modalForm form').modal('hide');
+        $('#modalForm form').attr('action', url);
+        $('#modalForm [name=_method]').val('post');
+    }
+    function editData(url) {
+        $('#modalForm').modal('show');
+        $('#modalForm .modal-title').text('Edit Data siswa');
+        $('#modalForm form')[0].reset();
+        $('#modalForm form').attr('action', url);
+        $('#modalForm [name=_method]').val('put');
+        $.get(url)
+            .done((response) => {
+                $('#modalForm [name=nama]').val(response.nama);
+                $('#modalForm [name=kelas]').val(response.kelas);
+                $('#modalForm [name=jurusan_id').val(response.jurusan_id);
+                $('#modalForm [name=asal_sekolah]').val(response.asal_sekolah);
+                $('#modalForm [name=jenis_kelamin]').val(response.jenis_kelamin);
+                
+            })
+            .fail((errors) => {
+                alert('Tidak dapat menampilkan Data');
+                return;
+            })
+    }
+    function deleteData(url) {
+        swal({
+                title: "Yakin ingin Menghapus Data ini?",
+                text: "Jika Anda klick OK! Maka data akan terhapus",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
-                })
-                .then((willDelete) => {
+            })
+            .then((willDelete) => {
                 if (willDelete) {
                     $.post(url, {
-                    '_token' : $('[name=csrf-token]').attr('content'),
-                    '_method' : 'delete'
-                })
-                .done((response) => {
-                    swal({
-                    title: "Sukses",
-                    text: "Data berhasil dihapus!",
-                    icon: "success",
+                        '_token': $('[name=csrf-token]').attr('content'),
+                        '_method': 'delete'
+                    })
+                    .done((response) => {
+                        swal({
+                            title: "Sukses",
+                            text: "Data Berhasil dihapus",
+                            icon: "success",
+                        });
+                        return;
+                    })
+                    .fail((erorrs) => {
+                        swal({
+                            title: "Gagal",
+                            text: "Data Gagal dihapus",
+                            icon: "error",
+                        });
+                        return;
                     });
-                })
-                .fail((errors) => {
-                    swal({
-                    title: "Gagal",
-                    text: "Data gagal dihapus!",
-                    icon: "error",
-                    });
-                })
-                table.ajax.reload();
+                    table.ajax.reload();
                 }
             });
-
-        }
-    </script>
+    }
+</script>
 @endpush

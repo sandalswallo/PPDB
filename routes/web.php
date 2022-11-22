@@ -8,7 +8,7 @@ use App\Http\Controllers\{
     JurusanController
 };
 
-Route::get('/welcome', function () {
+Route::get('/', function () {
     return view('home.welcome');
 });
 

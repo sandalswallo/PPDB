@@ -43,7 +43,6 @@ class SiswaController extends Controller
                 <div class="btn-group">
                     <button onclick="editData(`' .route('siswa.update', $siswa->id). '`)" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button>
                     <button onclick="deleteData(`' .route('siswa.destroy', $siswa->id). '`)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                    <button onclick="deleteData(`' .route('siswa.destroy', $siswa->id). '`)" class="btn btn-success btn-sm"><i class="fa fa-print"></i></button>
                 </div>
                 ';
             })
@@ -72,6 +71,7 @@ class SiswaController extends Controller
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
             'kelas' => 'required',
+            'jenis_kelamin' => 'required',
             'asal_sekolah' => 'required',
             'jurusan_id' => 'required',
            
@@ -84,7 +84,8 @@ class SiswaController extends Controller
         $siswa = Siswa::create([
             'nama' => $request->nama,
             'jurusan_id' => $request->jurusan_id,
-            'kelas' => $request->kelas_id,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'kelas' => $request->kelas,
             'asal_sekolah' => $request->asal_sekolah,
             
         ]);
@@ -131,6 +132,10 @@ class SiswaController extends Controller
     {
         $siswa = Siswa::find($id);
         $siswa->nama = $request->nama;
+        $siswa->jenis_kelamin = $request->jenis_kelamin;
+        $siswa->jurusan = $request->jurusan;
+        $siswa->kelas = $request->kelas;
+        $siswa->asal_sekolah = $request->asal_sekolah;
         $siswa->update();
 
         return response()->json('Data Berhasil Disimpan');

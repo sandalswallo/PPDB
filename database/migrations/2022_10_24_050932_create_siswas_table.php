@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('kelas');
             $table->string('jurusan');
             $table->string('asal_sekolah');
+            $table->enum('jenis_kelamin',['laki-laki','perempuan']);
             $table->timestamps();
         });
     }
